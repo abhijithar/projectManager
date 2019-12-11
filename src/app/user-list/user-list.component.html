@@ -1,0 +1,32 @@
+<form>
+
+  <div class="form-group row">
+
+    <div class="col-sm-4">
+      <input type="text" class="form-control" [(ngModel)]="searchText" name="searchText">
+    </div>
+
+    <div class="col-sm-1">
+      <label class="col-form-label">Sort By</label>
+    </div>
+
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary" (click)="onSortByFname()">First Name</button>
+    </div>
+
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary" (click)="onSortByLname()">Last Name</button>
+    </div>
+
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary" (click)="onSortById()">Id</button>
+    </div>
+
+  </div>
+</form>
+
+<ul class="list-group" id="userList">
+  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of userListData | orderBy:sortOrder | filter: searchText">
+    <app-user-list-item [userData]="user" (userDataProcessed)="onuserDataProcessed($event)"></app-user-list-item>
+  </li>
+</ul>
