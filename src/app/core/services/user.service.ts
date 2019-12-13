@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserserviceService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
   private userSvcBaseUrl = 'http://localhost:5100/users'

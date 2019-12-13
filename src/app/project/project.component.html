@@ -1,3 +1,123 @@
-<p>
-  project works!
-</p>
+<form>
+
+  <div class="form-group row">
+    <label for="project" class="col-sm-1 col-form-label">Project</label>
+    <div class="col-sm-5">
+      <input type="text" class="form-control" id="project" [(ngModel)]="project" name="project">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="gridCheck" [(ngModel)]="setDates" name="setDates">
+        <label for="gridCheck" class="form-check-label">
+          Set Start and End Date
+        </label>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <input type="date" class="form-control" [disabled]="!setDates"  [(ngModel)]="startDate" name="startDate">
+    </div>
+    <div class="col-sm-2">
+      <input type="date" class="form-control" [disabled]="!setDates"  [(ngModel)]="endDate" name="endDate">
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label for="project_Id" class="col-sm-1 col-form-label">Priority</label>
+    <div class="col-sm-5">
+      <input type="range" class="form-control-range" min="0" max="30" value="0" [(ngModel)]="priority" name="priority">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="manager_Id" class="col-sm-1 col-form-label">Manager</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="manager_Id" [(ngModel)]="manager_Id" name="manager_Id">
+    </div>
+
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userSearchModal">Search</button>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-1">
+      <button type="button" class="btn btn-primary btn-block" (click)="onAddProject()">Add</button>
+    </div>
+
+    <div class="col-sm-1">
+      <button type="reset" class="btn btn-primary btn-block">Reset</button>
+    </div>
+
+  </div>
+
+</form>
+<hr>
+<form>
+
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+
+    <div class="col-sm-1">
+      <label class="col-form-label">Sort By</label>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary btn-block" (click)="onSortByStartDate()">Start Date</button>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary btn-block" (click)="onSortByEndDate()">End Date</button>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary btn-block" (click)="onSortByPriority()">Priority</button>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary btn-block" (click)="onSortByCompleted()">Completed</button>
+    </div>
+
+  </div>
+
+</form>
+
+<ul class="list-group" id="projectList">
+  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectList | orderByProject:sortOrder | filterProject: searchText">
+    <!-- <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let project of projectList"> -->
+    <app-project-list-item [projectData]="project" (selectedProject)="onProjectSelected($event)"></app-project-list-item>
+  </li>
+</ul>
+
+<!-- Search Modal -->
+<div class="modal fade" id="userSearchModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Search Users</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group" id="projectList">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of userList">
+            <button type="button" class="list-group-item list-group-item-action" data-dismiss="modal" (click)="onUserSelected(user)">{{user.firstName}} {{user.lastName}}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

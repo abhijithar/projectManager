@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../core/models/user';
-import { UserserviceService } from '../core/services/userservice.service';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-user-list-item',
@@ -15,7 +15,7 @@ export class UserListItemComponent implements OnInit {
   action: string;
 
   constructor(
-    private userSvc: UserserviceService
+    private userSvc: UserService
   ) { }
 
   ngOnInit() {

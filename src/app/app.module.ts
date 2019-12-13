@@ -12,7 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OrderByPipe } from './core/pipes/orderBy';
 import { FilterPipe } from './core/pipes/filter';
+import { OrderByProjectPipe } from './core/pipes/orderByProject';
+import { FilterProjectPipe } from './core/pipes/filterProject';
+
 import { ProjectComponent } from './project/project.component';
+import { ProjectListItemComponent } from './project-list-item/project-list-item.component';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { AppModalComponent } from './app-modal/app-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +28,22 @@ import { ProjectComponent } from './project/project.component';
     UserListComponent,
     OrderByPipe,
     FilterPipe,
-    ProjectComponent
+    OrderByProjectPipe,
+    FilterProjectPipe,
+    ProjectComponent,
+    ProjectListItemComponent,
+    UserSearchComponent,
+    AppModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[UserSearchComponent]
 })
 export class AppModule { }

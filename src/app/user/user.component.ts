@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 
-import { UserserviceService } from '../core/services/userservice.service';
+import { UserService } from '../core/services/user.service';
 import { User } from '../core/models/user';
 
 @Component({
@@ -17,9 +17,9 @@ export class UserComponent implements OnInit {
   userData: User;
   userList: User[];
   updateBtn: boolean;
-
+ 
   constructor(
-    private userSvc: UserserviceService,
+    private userSvc: UserService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
     );
 
   }
-
+ 
   onuserDataProcessed(userData) {
 
     if (userData !== null) {
